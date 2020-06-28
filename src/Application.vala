@@ -31,13 +31,16 @@ namespace Yishu {
 
 	public class Application : Gtk.Application {
 		private TodoFile todo_file;
-		private MainWindow window;
+		private MainWindow window = null;
 		private Gtk.Menu popup_menu;
 		private Gtk.ListStore tasks_list_store;
 		private TreeModelFilter tasks_model_filter;
-		private TreeModelSort tasks_model_sort;
-        public SearchTasks search_entry;
+		public TreeModelSort tasks_model_sort;
+		public SearchEntry search_entry;
 
+		/* Variables, Parameters and stuff */
+		private string project_filter;
+		private string context_filter;
 		private Task trashed_task;
 		public string current_filename = null;
 
@@ -70,16 +73,14 @@ namespace Yishu {
 			tasks_list_store = new Gtk.ListStore (6, typeof (string), typeof(string), typeof(GLib.Object), typeof(bool), typeof(bool), typeof(int));
 			setup_model();
 			window.tree_view.set_model(tasks_model_sort);
-			search_entry = new SearchTasks (window.tree_view, tasks_model_sort);
-			var header_context = search_entry.get_style_context ();
-            header_context.add_class (Gtk.STYLE_CLASS_FLAT);
-            header_context.add_class ("yi-searchbar");
-			search_entry.placeholder_text = _("Search task");
-			search_entry.set_tooltip_text (_("Type Task Name"));
-			search_entry.margin_start = 24;
-			search_entry.hexpand = true;
-            window.toolbar.set_custom_title(search_entry);
 			setup_menus();
+			search_entry = new SearchEntry (window.tree_view, tasks_model_sort);
+			var search_context = search_entry.get_style_context ();
+            search_context.add_class ("yi-searchbar");
+			search_entry.placeholder_text = _("Search tasks…");
+			window.titlebar.pack_start (window.add_button);
+			window.titlebar.pack_start (search_entry);
+
 			window.add_button.clicked.connect(add_task);
 			window.tree_view.button_press_event.connect( (tv, event) => {
 				if ((event.button == 3) && (event.type == Gdk.EventType.BUTTON_PRESS)){	// 3 = Right mouse button
@@ -143,6 +144,32 @@ namespace Yishu {
     			}
             });
 			tasks_model_filter.refilter();
+
+			window.sidebar.item_selected.connect( (item) => {
+
+				string item_name = item.get_data("item-name");
+
+				if (item_name == "clear"){
+					context_filter = "";
+					project_filter = "";
+					tasks_model_filter.refilter();
+				}
+				else {
+					item_name = item.parent.get_data("item-name");
+					if (item_name == "contexts"){
+						context_filter = "@"+item.name;
+						project_filter = "";
+						tasks_model_filter.refilter();
+					}
+					else if (item_name == "projects") {
+						project_filter = "+"+item.name;
+						context_filter = "";
+						tasks_model_filter.refilter();
+					}
+				}
+			});
+
+			update_global_tags();
 		}
 
 		private void toggle_show_completed(){
@@ -237,20 +264,108 @@ namespace Yishu {
 		}
 
 		private void update_global_tags(){
-			var settings = AppSettings.get_default ();
-			bool show_completed = settings.show_completed;
+			var projects = new List<string>();
+			var contexts = new List<string>();
+			var selected_item = window.sidebar.selected;
+
+			window.projects_category.clear();
+			window.contexts_category.clear();
 
 			tasks_list_store.foreach( (model, path, iter) => {
+
 				Task task;
 				model.get(iter, Columns.TASK_OBJECT, out task, -1);
 
-				if (!show_completed && task.done){
+				if (task.done){
 					return false;
+				}
+
+				foreach (string context in task.contexts ){
+					var ctx = context.splice(0, 1);
+					if(!is_in_list(contexts, ctx)){
+						contexts.append(ctx);
+					}
+				}
+				foreach (string project in task.projects){
+					var prj = project.splice(0, 1);
+					if(!is_in_list(projects, prj)){
+						projects.append(prj);
+					}
 				}
 
 				return false;
 
 			});
+
+			foreach (string context in contexts){
+				var item = new Granite.Widgets.SourceList.Item(context);
+				int count = 0;
+				tasks_list_store.foreach( (model, path, iter) => {
+
+					Task task;
+					model.get(iter, Columns.TASK_OBJECT, out task, -1);
+					if (task.done){
+						return false;
+					}
+					if (is_in_list(task.contexts, "@"+context)){
+						count ++;
+					}
+					return false;
+				});
+				if (count > 0)
+					item.badge = "%u".printf(count);
+				window.contexts_category.add(item);
+			}
+			foreach (string project in projects){
+				var item = new Granite.Widgets.SourceList.Item(project);
+				int count = 0;
+				tasks_list_store.foreach( (model, path, iter) => {
+					Task task;
+					model.get(iter, Columns.TASK_OBJECT, out task,-1);
+					if (task.done){
+						return false;
+					}
+					if (is_in_list(task.projects, "+"+project)){
+						count++;
+					}
+					return false;
+				});
+				if (count > 0){
+					item.badge = "%u".printf(count);
+				}
+				window.projects_category.add(item);
+			}
+
+
+			if (selected_item != null) {
+
+				bool flag = false;
+				foreach (Granite.Widgets.SourceList.Item item in window.projects_category.children){
+					if (item.name == selected_item.name){
+						flag = true;
+						window.sidebar.selected = item;
+						break;
+					}
+				}
+				if (!flag){
+					foreach (Granite.Widgets.SourceList.Item item in window.contexts_category.children){
+						if (item.name == selected_item.name){
+							flag = true;
+							window.sidebar.selected = item;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		private bool is_in_list(List<string> list, string item){
+			foreach (string i in list){
+				if (i == item){
+					return true;
+				}
+			}
+			return false;
 		}
 
 		private Task get_selected_task(){

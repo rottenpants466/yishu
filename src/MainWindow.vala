@@ -19,15 +19,21 @@
 using Gtk;
 
 namespace Yishu {
-	public class MainWindow : Gtk.Window {
+	public class MainWindow : Hdy.Window {
+	    public Gtk.Application app { get; construct; }
 		public Gtk.Box info_bar_box;
-		public Gtk.HeaderBar toolbar;
+		public Hdy.HeaderBar titlebar;
+		public Hdy.HeaderBar fauxtitlebar;
+		public Hdy.Leaflet leaflet;
 		public Gtk.Button open_button;
 		public Gtk.Button add_button;
 		public Granite.Widgets.Welcome welcome;
 		public Granite.Widgets.Welcome no_file;
 		public Gtk.TreeView tree_view;
 		public Gtk.CellRendererToggle cell_renderer_toggle;
+		public Granite.Widgets.SourceList sidebar;
+		public Granite.Widgets.SourceList.ExpandableItem projects_category;
+		public Granite.Widgets.SourceList.ExpandableItem contexts_category;
 
 		public const string ACTION_PREFIX = "win.";
 		public const string ACTION_PREFS = "action_prefs";
@@ -39,11 +45,14 @@ namespace Yishu {
         };
 
         public MainWindow (Gtk.Application application) {
-            GLib.Object (application: application,
-            icon_name: "com.github.lainsce.yishu",
-            height_request: 600,
-            width_request: 500,
-            title: N_("Yishu"));
+            GLib.Object (
+                         application: application,
+                         app: application,
+                         icon_name: "com.github.lainsce.yishu",
+                         height_request: 600,
+                         width_request: 500,
+                         title: N_("Yishu")
+            );
         }
 
         construct {
@@ -79,36 +88,40 @@ namespace Yishu {
                 resize (w, h);
             }
 
-			var vbox = new Box(Gtk.Orientation.VERTICAL, 0);
 			var stack = new Stack();
 			var swin = new ScrolledWindow(null, null);
+			swin.get_style_context ().add_class ("yi-tv");
 
 			welcome = new Granite.Widgets.Welcome(_("No Todo.txt File Open"), _("Open a todo.txt file to start adding tasks"));
             welcome.append("appointment-new", _("Add task"), _("Create a new todo.txt file with this task in your Home folder"));
 			welcome.append("help-contents", _("What is a todo.txt file?"), _("Learn more about todo.txt files"));
 			no_file = new Granite.Widgets.Welcome(_("No Todo.txt File Found"), _("Add tasks to start this todo.txt file"));
 
-			/* Create toolbar */
-			toolbar = new HeaderBar();
-            this.set_titlebar(toolbar);
-            toolbar.set_show_close_button (true);
-            toolbar.has_subtitle = false;
-            var header_context = toolbar.get_style_context ();
+			/* Create titlebar */
+			titlebar = new Hdy.HeaderBar();
+            titlebar.set_show_close_button (true);
+            titlebar.has_subtitle = false;
+            var header_context = titlebar.get_style_context ();
             header_context.add_class ("yi-titlebar");
+            var titlebar_style_context = titlebar.get_style_context ();
+            titlebar_style_context.add_class (Gtk.STYLE_CLASS_FLAT);
+            titlebar_style_context.add_class ("tt-toolbar");
+            titlebar.has_subtitle = false;
+            titlebar.title = "Yishu";
+            titlebar.hexpand = true;
+            titlebar.set_size_request (-1,45);
+
+            fauxtitlebar = new Hdy.HeaderBar();
+            fauxtitlebar.set_show_close_button (true);
+            fauxtitlebar.has_subtitle = false;
+            var fauxheader_context = fauxtitlebar.get_style_context ();
+            fauxheader_context.add_class ("yi-column");
+            fauxtitlebar.set_size_request (200,45);
 
 			add_button = new Gtk.Button ();
-            add_button.set_image (new Gtk.Image.from_icon_name ("appointment-new-symbolic", Gtk.IconSize.SMALL_TOOLBAR));
+            add_button.set_image (new Gtk.Image.from_icon_name ("appointment-new-symbolic", Gtk.IconSize.BUTTON));
             add_button.has_tooltip = true;
             add_button.tooltip_text = (_("Add task…"));
-            add_button.halign = Gtk.Align.END;
-            add_button.valign = Gtk.Align.END;
-            add_button.margin = 12;
-
-            var add_button_context = add_button.get_style_context ();
-            add_button_context.add_class ("yi-addbutton");
-
-            var overlay = new Gtk.Overlay ();
-            overlay.expand = true;
 
 			var prefs_button = new Gtk.ModelButton ();
             prefs_button.action_name = ACTION_PREFIX + ACTION_PREFS;
@@ -126,28 +139,92 @@ namespace Yishu {
             menu.add (menu_grid);
 
             var menu_button = new Gtk.MenuButton ();
-            menu_button.set_image (new Gtk.Image.from_icon_name ("open-menu", Gtk.IconSize.LARGE_TOOLBAR));
+            menu_button.set_image (new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.BUTTON));
             menu_button.has_tooltip = true;
             menu_button.tooltip_text = (_("Settings"));
 			menu_button.popover = menu;
 
-			toolbar.pack_end (menu_button);
+			titlebar.pack_end (menu_button);
 
 			tree_view = setup_tree_view();
 			swin.add(tree_view);
 			stack.add(welcome);
             stack.add(swin);
-            
-            overlay.add_overlay (add_button);
-            overlay.add (stack);
 
+            var vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
 			info_bar_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
-			vbox.pack_start(info_bar_box, false, false, 0);
-			vbox.pack_start(overlay, true, true, 0);
-			add(vbox);
+			vbox.pack_start (info_bar_box, false, false, 0);
+			vbox.pack_start (stack, true, true, 0);
+
+			/* Create sidebar */
+			sidebar = new Granite.Widgets.SourceList();
+			sidebar.hexpand = false;
+			var sidebar_context = sidebar.get_style_context ();
+            sidebar_context.add_class ("yi-column");
+			projects_category = new Granite.Widgets.SourceList.ExpandableItem ("");
+			string projects_str = _("CATEGORIES");
+            projects_category.markup = """<span weight="bold">%s</span>""".printf(projects_str);
+			contexts_category = new Granite.Widgets.SourceList.ExpandableItem ("");
+			string contexts_str = _("LOCATIONS");
+            contexts_category.markup = """<span weight="bold">%s</span>""".printf(contexts_str);
+			projects_category.set_data("item-name", "projects");
+			contexts_category.set_data("item-name", "contexts");
+			sidebar.root.add(projects_category);
+			sidebar.root.add(contexts_category);
+			sidebar.root.expand_all();
+
+			var sgrid = new Gtk.Grid ();
+            sgrid.attach (fauxtitlebar, 0, 0, 1, 1);
+            sgrid.attach (sidebar, 0, 1, 1, 1);
+            sgrid.show_all ();
+
+            var grid = new Gtk.Grid ();
+            grid.attach (titlebar, 1, 0, 1, 1);
+            grid.attach (vbox, 1, 1, 1, 1);
+            grid.show_all ();
+
+            var separator = new Gtk.Separator (Gtk.Orientation.VERTICAL);
+            var separator_cx = separator.get_style_context ();
+            separator_cx.add_class ("vsep");
+
+            update ();
+
+            leaflet = new Hdy.Leaflet ();
+            leaflet.add (sgrid);
+            leaflet.add (separator);
+            leaflet.add (grid);
+            leaflet.transition_type = Hdy.LeafletTransitionType.UNDER;
+            leaflet.show_all ();
+            leaflet.can_swipe_back = true;
+            leaflet.set_visible_child (grid);
+
+            leaflet.child_set_property (separator, "allow-visible", false);
+
+            leaflet.notify["folded"].connect (() => {
+                update ();
+            });
+
+            this.add (leaflet);
 
 			show_all();
 		}
+
+		public void reset(){
+			projects_category.clear();
+			contexts_category.clear();
+		}
+
+		private void update () {
+            if (leaflet != null && leaflet.get_folded ()) {
+                // On Mobile size, so.... have to have no buttons anywhere.
+                fauxtitlebar.set_decoration_layout (":");
+                titlebar.set_decoration_layout (":");
+            } else {
+                // Else you're on Desktop size, so business as usual.
+                fauxtitlebar.set_decoration_layout ("close:");
+                titlebar.set_decoration_layout (":maximize");
+            }
+        }
 
 		private void action_prefs () {
             debug ("Prefs button pressed.");
@@ -189,6 +266,8 @@ namespace Yishu {
 
 		private TreeView setup_tree_view(){
 			TreeView tv = new TreeView();
+			tv.headers_visible = false;
+			tv.vexpand = true;
 			TreeViewColumn col;
 
 			col = new TreeViewColumn.with_attributes(_("Priority"), new Granite.Widgets.CellRendererBadge(), "text", Columns.PRIORITY);

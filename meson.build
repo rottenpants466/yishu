@@ -1,11 +1,18 @@
 # Name our project
 project('com.github.lainsce.yishu', ['vala', 'c'],
-    version: '1.2.5'
+    version: '2.0.0'
 )
 
 # Import main lib files
 gnome = import('gnome')
 i18n = import('i18n')
+
+add_global_arguments([
+        '-DGETTEXT_PACKAGE="@0@"'.format(meson.project_name()),
+        '-DHANDY_USE_UNSTABLE_API'
+    ],
+    language:'c'
+)
 
 # Compile the GResources for this project
 asresources = gnome.compile_resources(
@@ -55,6 +62,7 @@ executable(
     dependencies: [
         dependency('granite'),
         dependency('gobject-2.0'),
+        dependency('libhandy-1'),
         dependency('gtk+-3.0')
     ],
     vala_args: [
