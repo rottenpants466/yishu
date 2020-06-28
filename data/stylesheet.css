@@ -8,6 +8,10 @@ window.unified decoration-overlay {
   border-radius: 8px;
 }
 
+.title {
+    font-weight: 700;
+}
+
 .yi-titlebar {
     box-shadow: none;
     background: #FFF;
