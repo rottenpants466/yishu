@@ -22,14 +22,17 @@ namespace Yishu {
 	public class MainWindow : Hdy.Window {
 	    public Gtk.Application app { get; construct; }
 		public Gtk.Box info_bar_box;
+		public Gtk.Switch mode_switch;
 		public Hdy.HeaderBar titlebar;
 		public Hdy.HeaderBar fauxtitlebar;
 		public Hdy.Leaflet leaflet;
 		public Gtk.Button open_button;
 		public Gtk.Button add_button;
+		public Gtk.ScrolledWindow swin;
 		public Granite.Widgets.Welcome welcome;
 		public Granite.Widgets.Welcome no_file;
 		public Gtk.TreeView tree_view;
+		public Gtk.TreeView tv;
 		public Gtk.CellRendererToggle cell_renderer_toggle;
 		public Granite.Widgets.SourceList sidebar;
 		public Granite.Widgets.SourceList.ExpandableItem projects_category;
@@ -53,6 +56,50 @@ namespace Yishu {
                          width_request: 500,
                          title: N_("Yishu")
             );
+
+            if (Yishu.Application.grsettings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK) {
+                Yishu.Application.gsettings.set_boolean("dark-mode", true);
+                mode_switch.sensitive = false;
+            } else if (Yishu.Application.grsettings.prefers_color_scheme == Granite.Settings.ColorScheme.NO_PREFERENCE) {
+                Yishu.Application.gsettings.set_boolean("dark-mode", false);
+                mode_switch.sensitive = true;
+            }
+
+            Yishu.Application.grsettings.notify["prefers-color-scheme"].connect (() => {
+                if (Yishu.Application.grsettings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK) {
+                    Yishu.Application.gsettings.set_boolean("dark-mode", true);
+                    mode_switch.sensitive = false;
+                } else if (Yishu.Application.grsettings.prefers_color_scheme == Granite.Settings.ColorScheme.NO_PREFERENCE) {
+                    Yishu.Application.gsettings.set_boolean("dark-mode", false);
+                    mode_switch.sensitive = true;
+                }
+            });
+
+            if (Yishu.Application.gsettings.get_boolean("dark-mode")) {
+                Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = true;
+                titlebar.get_style_context ().add_class ("yi-titlebar-dark");
+                tv.get_style_context ().add_class ("yi-tv-dark");
+                swin.get_style_context ().add_class ("yi-tv-dark");
+            } else {
+                Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = false;
+                titlebar.get_style_context ().remove_class ("yi-titlebar-dark");
+                tv.get_style_context ().remove_class ("yi-tv-dark");
+                swin.get_style_context ().remove_class ("yi-tv-dark");
+            }
+
+            Yishu.Application.gsettings.changed.connect (() => {
+                if (Yishu.Application.gsettings.get_boolean("dark-mode")) {
+                    Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = true;
+                    titlebar.get_style_context ().add_class ("yi-titlebar-dark");
+                    tv.get_style_context ().add_class ("yi-tv-dark");
+                    swin.get_style_context ().add_class ("yi-tv-dark");
+                } else {
+                    Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = false;
+                    titlebar.get_style_context ().remove_class ("yi-titlebar-dark");
+                    tv.get_style_context ().remove_class ("yi-tv-dark");
+                    swin.get_style_context ().remove_class ("yi-tv-dark");
+                }
+            });
         }
 
         construct {
@@ -89,7 +136,7 @@ namespace Yishu {
             }
 
 			var stack = new Stack();
-			var swin = new ScrolledWindow(null, null);
+			swin = new ScrolledWindow(null, null);
 			swin.get_style_context ().add_class ("yi-tv");
 
 			welcome = new Granite.Widgets.Welcome(_("No Todo.txt File Open"), _("Open a todo.txt file to start adding tasks"));
@@ -103,13 +150,22 @@ namespace Yishu {
             titlebar.has_subtitle = false;
             var header_context = titlebar.get_style_context ();
             header_context.add_class ("yi-titlebar");
-            var titlebar_style_context = titlebar.get_style_context ();
-            titlebar_style_context.add_class (Gtk.STYLE_CLASS_FLAT);
-            titlebar_style_context.add_class ("tt-toolbar");
             titlebar.has_subtitle = false;
             titlebar.title = "Yishu";
             titlebar.hexpand = true;
             titlebar.set_size_request (-1,45);
+
+            var dlabel = new Gtk.Label (_("Dark Mode:"));
+            mode_switch = new Gtk.Switch ();
+            mode_switch.valign = Gtk.Align.CENTER;
+            Yishu.Application.gsettings.bind ("dark-mode", mode_switch, "active", SettingsBindFlags.DEFAULT);
+            mode_switch.has_focus = false;
+
+            var dark_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6);
+            dark_box.margin_start = 12;
+            dark_box.margin_top = 4;
+            dark_box.add (dlabel);
+            dark_box.add (mode_switch);
 
             fauxtitlebar = new Hdy.HeaderBar();
             fauxtitlebar.set_show_close_button (true);
@@ -125,14 +181,15 @@ namespace Yishu {
 
 			var prefs_button = new Gtk.ModelButton ();
             prefs_button.action_name = ACTION_PREFIX + ACTION_PREFS;
-			prefs_button.text = (_("Preferences"));
+			prefs_button.text = (_("Preferences…"));
 
 			var menu_grid = new Gtk.Grid ();
             menu_grid.margin = 6;
             menu_grid.row_spacing = 6;
-            menu_grid.column_spacing = 12;
+            menu_grid.column_spacing = 6;
             menu_grid.orientation = Gtk.Orientation.VERTICAL;
-            menu_grid.add (prefs_button);
+            menu_grid.attach (dark_box, 0, 1, 1, 1);
+            menu_grid.attach (prefs_button, 0, 2, 1, 1);
             menu_grid.show_all ();
 
             var menu = new Gtk.Popover (null);
@@ -265,7 +322,7 @@ namespace Yishu {
         }
 
 		private TreeView setup_tree_view(){
-			TreeView tv = new TreeView();
+			tv = new TreeView();
 			tv.headers_visible = false;
 			tv.vexpand = true;
 			TreeViewColumn col;

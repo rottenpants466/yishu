@@ -37,6 +37,8 @@ namespace Yishu {
 		private TreeModelFilter tasks_model_filter;
 		public TreeModelSort tasks_model_sort;
 		public SearchEntry search_entry;
+		public static Granite.Settings grsettings;
+		public static GLib.Settings gsettings;
 
 		/* Variables, Parameters and stuff */
 		private string project_filter;
@@ -44,9 +46,15 @@ namespace Yishu {
 		private Task trashed_task;
 		public string current_filename = null;
 
+		static construct {
+			gsettings = new GLib.Settings ("com.github.lainsce.palaura");
+		}
+
 		construct {
 			application_id = "com.github.lainsce.yishu";
 			trashed_task = null;
+
+			grsettings = Granite.Settings.get_default ();
 		}
 
 		public Application () {
