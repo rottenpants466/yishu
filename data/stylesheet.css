@@ -42,7 +42,7 @@ window.unified decoration-overlay {
 }
 
 .yi-searchbar {
-    margin: 2px 8px;
+    margin: 2px 1px;
     border-radius: 8px;
     box-shadow: none;
     background: shade(@color_primary, 1.2);
