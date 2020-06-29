@@ -47,7 +47,7 @@ namespace Yishu {
 		public string current_filename = null;
 
 		static construct {
-			gsettings = new GLib.Settings ("com.github.lainsce.palaura");
+			gsettings = new GLib.Settings ("com.github.lainsce.yishu");
 		}
 
 		construct {
