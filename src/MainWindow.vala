@@ -174,7 +174,7 @@ namespace Yishu {
             fauxtitlebar.has_subtitle = false;
             var fauxheader_context = fauxtitlebar.get_style_context ();
             fauxheader_context.remove_class ("titlebar");
-            fauxtitlebar.set_size_request (200,45);
+            fauxtitlebar.set_size_request (193,45);
 
 			add_button = new Gtk.Button ();
             add_button.set_image (new Gtk.Image.from_icon_name ("appointment-new-symbolic", Gtk.IconSize.BUTTON));
