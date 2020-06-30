@@ -208,6 +208,7 @@ namespace Yishu {
 
 			titlebar.pack_end (menu_button);
 			titlebar.pack_end (delete_all_button);
+			titlebar.pack_end (add_button);
 
             var normal_icon = new Gtk.Image.from_icon_name ("appointment-new-symbolic", Gtk.IconSize.DND);
             var normal_label = new Gtk.Label (_("Start by adding some tasks…"));

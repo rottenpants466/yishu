@@ -84,7 +84,6 @@ namespace Yishu {
             search_context.add_class ("yi-searchbar");
 			search_entry.placeholder_text = _("Search tasks…");
 			window.titlebar.pack_start (search_entry);
-			window.titlebar.pack_start (window.add_button);
 
 			window.add_button.clicked.connect(add_task);
 			window.tree_view.button_press_event.connect( (tv, event) => {
