@@ -113,7 +113,10 @@ namespace Yishu {
 					add_task();
 					break;
 					case 1:
-					GLib.AppInfo.launch_default_for_uri ("http://todotxt.com", null);
+					try {
+						GLib.AppInfo.launch_default_for_uri ("http://todotxt.com", null);
+					} catch (Error e) {
+            		}
 					break;
 				}
 			});
@@ -132,6 +135,9 @@ namespace Yishu {
 
 			window.delete_all_button.clicked.connect( (item) => {
 				delete_task ();
+				window.welcome.show();
+				window.tree_view.hide();
+				window.add_button.hide();
 			});
 
             if (read_file(null)) {
