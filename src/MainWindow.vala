@@ -26,11 +26,13 @@ namespace Yishu {
 		public Hdy.HeaderBar titlebar;
 		public Hdy.HeaderBar fauxtitlebar;
 		public Hdy.Leaflet leaflet;
-		public Gtk.Button open_button;
+		public Gtk.Button delete_all_button;
 		public Gtk.Button add_button;
 		public Gtk.ScrolledWindow swin;
 		public Granite.Widgets.Welcome welcome;
 		public Granite.Widgets.Welcome no_file;
+		public Gtk.Stack sidebar_stack;
+		public Gtk.Label sidebar_no_tags;
 		public Gtk.TreeView tree_view;
 		public Gtk.TreeView tv;
 		public Gtk.CellRendererToggle cell_renderer_toggle;
@@ -171,13 +173,18 @@ namespace Yishu {
             fauxtitlebar.set_show_close_button (true);
             fauxtitlebar.has_subtitle = false;
             var fauxheader_context = fauxtitlebar.get_style_context ();
-            fauxheader_context.add_class ("yi-column");
+            fauxheader_context.remove_class ("titlebar");
             fauxtitlebar.set_size_request (200,45);
 
 			add_button = new Gtk.Button ();
             add_button.set_image (new Gtk.Image.from_icon_name ("appointment-new-symbolic", Gtk.IconSize.BUTTON));
             add_button.has_tooltip = true;
             add_button.tooltip_text = (_("Add task…"));
+
+            delete_all_button = new Gtk.Button ();
+            delete_all_button.set_image (new Gtk.Image.from_icon_name ("edit-clear-all-symbolic", Gtk.IconSize.BUTTON));
+            delete_all_button.has_tooltip = true;
+            delete_all_button.tooltip_text = (_("Clear all tasks"));
 
 			var prefs_button = new Gtk.ModelButton ();
             prefs_button.action_name = ACTION_PREFIX + ACTION_PREFS;
@@ -202,6 +209,7 @@ namespace Yishu {
 			menu_button.popover = menu;
 
 			titlebar.pack_end (menu_button);
+			titlebar.pack_end (delete_all_button);
 
 			tree_view = setup_tree_view();
 			swin.add(tree_view);
@@ -216,8 +224,7 @@ namespace Yishu {
 			/* Create sidebar */
 			sidebar = new Granite.Widgets.SourceList();
 			sidebar.hexpand = false;
-			var sidebar_context = sidebar.get_style_context ();
-            sidebar_context.add_class ("yi-column");
+			sidebar.margin_start = 12;
 			projects_category = new Granite.Widgets.SourceList.ExpandableItem ("");
 			string projects_str = _("CATEGORIES");
             projects_category.markup = """<span weight="bold">%s</span>""".printf(projects_str);
@@ -230,10 +237,37 @@ namespace Yishu {
 			sidebar.root.add(contexts_category);
 			sidebar.root.expand_all();
 
-			var sgrid = new Gtk.Grid ();
+			sidebar_no_tags = new Gtk.Label (_("No Tags…"));
+			sidebar_no_tags.halign = Gtk.Align.CENTER;
+			sidebar_no_tags.vexpand = true;
+            var sidebar_no_tags_context = sidebar_no_tags.get_style_context ();
+            sidebar_no_tags_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+            sidebar_no_tags_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+            sidebar_no_tags.margin = 12;
+            sidebar_no_tags.show_all ();
+
+            var sidebar_header = new Gtk.Label("");
+            string header = _("TAGS");
+            sidebar_header.halign = Gtk.Align.START;
+            sidebar_header.margin_start = 6;
+            sidebar_header.set_markup ("""<span weight="bold">%s</span>""".printf(header));
+
+            var sgrid = new Gtk.Grid ();
+			sgrid.get_style_context ().add_class ("yi-column");
             sgrid.attach (fauxtitlebar, 0, 0, 1, 1);
-            sgrid.attach (sidebar, 0, 1, 1, 1);
+            sgrid.attach (sidebar_header, 0, 1, 1, 1);
+            sgrid.attach (sidebar, 0, 2, 1, 1);
+            sgrid.attach (sidebar_no_tags, 0, 2, 1, 1);
+
             sgrid.show_all ();
+
+            if (projects_category != null) {
+                sidebar.show ();
+                sidebar_no_tags.hide ();
+            } else {
+                sidebar.hide ();
+                sidebar_no_tags.show ();
+            }
 
             var grid = new Gtk.Grid ();
             grid.attach (titlebar, 1, 0, 1, 1);

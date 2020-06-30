@@ -130,6 +130,10 @@ namespace Yishu {
 				toggle_show_completed();
 			});
 
+			window.delete_all_button.clicked.connect( (item) => {
+				delete_task ();
+			});
+
             if (read_file(null)) {
 				window.welcome.hide();
 				window.tree_view.show();
@@ -191,7 +195,6 @@ namespace Yishu {
 			window.add_accel_group(accel_group_popup);
 			popup_menu.set_accel_group(accel_group_popup);
 			var edit_task_menu_item = new Gtk.MenuItem.with_label(_("Edit task"));
-			var delete_task_menu_item = new Gtk.MenuItem.with_label(_("Delete task"));
 			var toggle_done_menu_item = new Gtk.MenuItem.with_label(_("Toggle done"));
 
 			var priority_menu = new Gtk.Menu();
@@ -227,13 +230,11 @@ namespace Yishu {
 			edit_task_menu_item.add_accelerator("activate", accel_group_popup, Gdk.Key.F2, 0, Gtk.AccelFlags.VISIBLE);
 			toggle_done_menu_item.add_accelerator("activate", accel_group_popup, Gdk.Key.space, 0, Gtk.AccelFlags.VISIBLE);
 			edit_task_menu_item.activate.connect(edit_task);
-			delete_task_menu_item.activate.connect(delete_task);
 			toggle_done_menu_item.activate.connect(toggle_done);
 
 			popup_menu.append(toggle_done_menu_item);
 			popup_menu.append(priority_menu_item);
 			popup_menu.append(edit_task_menu_item);
-			popup_menu.append(delete_task_menu_item);
 
 			popup_menu.show_all();
 		}
@@ -280,12 +281,14 @@ namespace Yishu {
 			window.contexts_category.clear();
 
 			tasks_list_store.foreach( (model, path, iter) => {
-
 				Task task;
 				model.get(iter, Columns.TASK_OBJECT, out task, -1);
 
 				if (task.done){
+				    window.sidebar.visible = false;
 					return false;
+				} else {
+					window.sidebar.visible = true;
 				}
 
 				foreach (string context in task.contexts ){
@@ -309,19 +312,21 @@ namespace Yishu {
 				var item = new Granite.Widgets.SourceList.Item(context);
 				int count = 0;
 				tasks_list_store.foreach( (model, path, iter) => {
-
 					Task task;
 					model.get(iter, Columns.TASK_OBJECT, out task, -1);
 					if (task.done){
-						return false;
+						count--;
 					}
 					if (is_in_list(task.contexts, "@"+context)){
-						count ++;
+						count++;
 					}
 					return false;
 				});
-				if (count > 0)
+				if (count > 0) {
 					item.badge = "%u".printf(count);
+				} else {
+					item.badge = "0";
+				}
 				window.contexts_category.add(item);
 			}
 			foreach (string project in projects){
@@ -331,7 +336,7 @@ namespace Yishu {
 					Task task;
 					model.get(iter, Columns.TASK_OBJECT, out task,-1);
 					if (task.done){
-						return false;
+						count--;
 					}
 					if (is_in_list(task.projects, "+"+project)){
 						count++;
@@ -340,6 +345,8 @@ namespace Yishu {
 				});
 				if (count > 0){
 					item.badge = "%u".printf(count);
+				} else {
+					item.badge = "0";
 				}
 				window.projects_category.add(item);
 			}
@@ -500,50 +507,10 @@ namespace Yishu {
 		}
 
 		private void delete_task () {
-			Task task = get_selected_task ();
-			if (task != null) {
-				trashed_task = task;
-				todo_file.lines.remove_at (task.linenr -1);
-				todo_file.write_file ();
-				tasks_list_store.remove(ref task.iter);
-
-				var infobar = new Gtk.InfoBar ();
-            	var infobar_label = new Gtk.Label (_("The task has been deleted"));
-				infobar.get_content_area ().add (infobar_label);
-				infobar.add_button(_("_Undo"), Gtk.ResponseType.ACCEPT);
-            	infobar.show_close_button = true;
-            	infobar.message_type = Gtk.MessageType.INFO;
-				infobar.show_all();
-
-				window.info_bar_box.foreach( (child) => {
-					child.destroy();
-				});
-
-				window.info_bar_box.pack_start(infobar, true, true, 0);
-				infobar.response.connect( (response) => {
-                    if (response == Gtk.ResponseType.ACCEPT) {
-                        undelete();
-                    }
-					infobar.destroy();
-				});
-
-				update_global_tags();
-			}
-		}
-
-		private void undelete () {
-			if (trashed_task != null){
-				debug ("Restoring task: " + trashed_task.text + " at line nr. " + "%u".printf(trashed_task.linenr));
-
-				todo_file.lines.insert(trashed_task.linenr - 1, trashed_task.to_string());
-				todo_file.write_file();
-				TreeIter iter;
-				tasks_list_store.append(out iter);
-				trashed_task.to_model(tasks_list_store, iter);
-				tasks_model_filter.refilter();
-
-				trashed_task = null;
-			}
+			tasks_list_store.clear();
+			todo_file.lines.clear();
+			todo_file.write_file();
+			update_global_tags();
 		}
 
 		public bool read_file (string? filename) {

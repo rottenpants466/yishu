@@ -74,7 +74,7 @@ window.unified decoration-overlay {
     background: mix (@accent_color, @content_view_bg, 0.95);
     border-right: 1px solid alpha (black, 0.25);
     box-shadow: none;
-    padding: 6px;
+    padding-left: 6px;
 }
 
 .yi-column .source-list {
