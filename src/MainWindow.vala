@@ -16,7 +16,6 @@
 * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 * Boston, MA 02110-1301 USA
 */
-using Gtk;
 
 namespace Yishu {
 	public class MainWindow : Hdy.Window {
@@ -37,6 +36,7 @@ namespace Yishu {
 		public Gtk.TreeView tv;
 		public Gtk.Grid normal_view;
 		public Gtk.CellRendererToggle cell_renderer_toggle;
+		public Gtk.Stack stack;
 		public Granite.Widgets.SourceList sidebar;
 		public Granite.Widgets.SourceList.ExpandableItem projects_category;
 		public Granite.Widgets.SourceList.ExpandableItem contexts_category;
@@ -98,11 +98,13 @@ namespace Yishu {
                     titlebar.get_style_context ().add_class ("yi-titlebar-dark");
                     tv.get_style_context ().add_class ("yi-tv-dark");
                     swin.get_style_context ().add_class ("yi-tv-dark");
+                    stack.get_style_context ().add_class ("yi-stack-dark");
                 } else {
                     Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = false;
                     titlebar.get_style_context ().remove_class ("yi-titlebar-dark");
                     tv.get_style_context ().remove_class ("yi-tv-dark");
                     swin.get_style_context ().remove_class ("yi-tv-dark");
+                    stack.get_style_context ().remove_class ("yi-stack-dark");
                 }
             });
         }
@@ -140,9 +142,9 @@ namespace Yishu {
                 resize (w, h);
             }
 
-			var stack = new Stack();
+			stack = new Gtk.Stack ();
 			stack.transition_type = Gtk.StackTransitionType.SLIDE_LEFT_RIGHT;
-			swin = new ScrolledWindow(null, null);
+			swin = new Gtk.ScrolledWindow(null, null);
 			swin.get_style_context ().add_class ("yi-tv");
 
 			/* Create titlebar */
@@ -376,25 +378,25 @@ namespace Yishu {
             return false;
         }
 
-		private TreeView setup_tree_view(){
-			tv = new TreeView();
+		private Gtk.TreeView setup_tree_view(){
+			tv = new Gtk.TreeView();
 			tv.headers_visible = false;
 			tv.vexpand = true;
-			TreeViewColumn col;
+			Gtk.TreeViewColumn col;
 
-			col = new TreeViewColumn.with_attributes(_("Priority"), new Granite.Widgets.CellRendererBadge(), "text", Columns.PRIORITY);
+			col = new Gtk.TreeViewColumn.with_attributes(_("Priority"), new Granite.Widgets.CellRendererBadge(), "text", Columns.PRIORITY);
 			col.set_sort_column_id(Columns.PRIORITY);
 			col.resizable = true;
 			tv.append_column(col);
 
-			col = new TreeViewColumn.with_attributes(_("Task"), new CellRendererText(), "markup", Columns.MARKUP);
+			col = new Gtk.TreeViewColumn.with_attributes(_("Task"), new Gtk.CellRendererText(), "markup", Columns.MARKUP);
 			col.set_sort_column_id(Columns.MARKUP);
 			col.resizable = true;
             col.expand = true;
 			tv.append_column(col);
 
-			cell_renderer_toggle = new CellRendererToggle();
-			col = new TreeViewColumn.with_attributes(_("Done"), cell_renderer_toggle, "active", Columns.DONE);
+			cell_renderer_toggle = new Gtk.CellRendererToggle();
+			col = new Gtk.TreeViewColumn.with_attributes(_("Done"), cell_renderer_toggle, "active", Columns.DONE);
 			col.set_sort_column_id(Columns.DONE);
 			col.resizable = true;
 			tv.append_column(col);
