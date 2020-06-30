@@ -85,6 +85,14 @@ window.unified decoration-overlay {
     font-weight: 700;
 }
 
+.yi-stack {
+    background: #F7F7F7;
+}
+
+.yi-stack-dark {
+    background: #151515;
+}
+
 .sidebar .badge,
 .source-list.badge,
 .source-list.badge:hover,

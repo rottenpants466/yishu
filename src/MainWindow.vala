@@ -83,11 +83,13 @@ namespace Yishu {
                 titlebar.get_style_context ().add_class ("yi-titlebar-dark");
                 tv.get_style_context ().add_class ("yi-tv-dark");
                 swin.get_style_context ().add_class ("yi-tv-dark");
+                stack.get_style_context ().add_class ("yi-stack-dark");
             } else {
                 Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = false;
                 titlebar.get_style_context ().remove_class ("yi-titlebar-dark");
                 tv.get_style_context ().remove_class ("yi-tv-dark");
                 swin.get_style_context ().remove_class ("yi-tv-dark");
+                stack.get_style_context ().remove_class ("yi-stack-dark");
             }
 
             Yishu.Application.gsettings.changed.connect (() => {
@@ -233,6 +235,7 @@ namespace Yishu {
 			swin.add(tree_view);
 			stack.add(normal_view);
             stack.add(swin);
+            stack.get_style_context ().add_class ("yi-stack");
 
             var vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
 			info_bar_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
