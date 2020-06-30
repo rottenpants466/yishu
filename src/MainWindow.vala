@@ -35,6 +35,7 @@ namespace Yishu {
 		public Gtk.Label sidebar_no_tags;
 		public Gtk.TreeView tree_view;
 		public Gtk.TreeView tv;
+		public Gtk.Grid normal_view;
 		public Gtk.CellRendererToggle cell_renderer_toggle;
 		public Granite.Widgets.SourceList sidebar;
 		public Granite.Widgets.SourceList.ExpandableItem projects_category;
@@ -138,13 +139,9 @@ namespace Yishu {
             }
 
 			var stack = new Stack();
+			stack.transition_type = Gtk.StackTransitionType.SLIDE_LEFT_RIGHT;
 			swin = new ScrolledWindow(null, null);
 			swin.get_style_context ().add_class ("yi-tv");
-
-			welcome = new Granite.Widgets.Welcome(_("No Todo.txt File Open"), _("Open a todo.txt file to start adding tasks"));
-            welcome.append("appointment-new", _("Add task"), _("Create a new todo.txt file with this task in your Home folder"));
-			welcome.append("help-contents", _("What is a todo.txt file?"), _("Learn more about todo.txt files"));
-			no_file = new Granite.Widgets.Welcome(_("No Todo.txt File Found"), _("Add tasks to start this todo.txt file"));
 
 			/* Create titlebar */
 			titlebar = new Hdy.HeaderBar();
@@ -180,6 +177,7 @@ namespace Yishu {
             add_button.set_image (new Gtk.Image.from_icon_name ("appointment-new-symbolic", Gtk.IconSize.BUTTON));
             add_button.has_tooltip = true;
             add_button.tooltip_text = (_("Add task…"));
+            add_button.visible = true;
 
             delete_all_button = new Gtk.Button ();
             delete_all_button.set_image (new Gtk.Image.from_icon_name ("edit-clear-all-symbolic", Gtk.IconSize.BUTTON));
@@ -211,9 +209,28 @@ namespace Yishu {
 			titlebar.pack_end (menu_button);
 			titlebar.pack_end (delete_all_button);
 
+            var normal_icon = new Gtk.Image.from_icon_name ("appointment-new-symbolic", Gtk.IconSize.DND);
+            var normal_label = new Gtk.Label (_("Start by adding some tasks…"));
+            var normal_label_context = normal_label.get_style_context ();
+            normal_label_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+            normal_label_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+            var normal_label2 = new Gtk.Label (_("You can configure which Todo.txt file to use in Settings, the default is on Home."));
+            normal_label2.max_width_chars = 40;
+            normal_label2.wrap = true;
+            normal_label2.halign = Gtk.Align.START;
+
+            normal_view = new Gtk.Grid ();
+            normal_view.column_spacing = 6;
+            normal_view.margin = 24;
+            normal_view.expand = true;
+            normal_view.halign = normal_view.valign = Gtk.Align.CENTER;
+            normal_view.attach (normal_icon,0,0,1,2);
+            normal_view.attach (normal_label,1,0,1,1);
+            normal_view.attach (normal_label2,1,1,1,1);
+
 			tree_view = setup_tree_view();
 			swin.add(tree_view);
-			stack.add(welcome);
+			stack.add(normal_view);
             stack.add(swin);
 
             var vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);

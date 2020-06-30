@@ -41,8 +41,6 @@ namespace Yishu {
 		public static GLib.Settings gsettings;
 
 		/* Variables, Parameters and stuff */
-		private string project_filter;
-		private string context_filter;
 		private Task trashed_task;
 		public string current_filename = null;
 
@@ -77,7 +75,6 @@ namespace Yishu {
 
 		public override void activate(){
 			window = new MainWindow(this);
-            var settings = AppSettings.get_default ();
 			tasks_list_store = new Gtk.ListStore (6, typeof (string), typeof(string), typeof(GLib.Object), typeof(bool), typeof(bool), typeof(int));
 			setup_model();
 			window.tree_view.set_model(tasks_model_sort);
@@ -107,19 +104,6 @@ namespace Yishu {
 				return false;
 			});
 			window.tree_view.row_activated.connect(edit_task);
-			window.welcome.activated.connect((index) => {
-				switch (index){
-					case 0:
-					add_task();
-					break;
-					case 1:
-					try {
-						GLib.AppInfo.launch_default_for_uri ("http://todotxt.com", null);
-					} catch (Error e) {
-            		}
-					break;
-				}
-			});
 			window.cell_renderer_toggle.toggled.connect( (toggle, path) => {
 				Task task;
 				TreeIter iter;
@@ -135,57 +119,9 @@ namespace Yishu {
 
 			window.delete_all_button.clicked.connect( (item) => {
 				delete_task ();
-				window.welcome.show();
-				window.tree_view.hide();
-				window.add_button.hide();
 			});
 
-            if (read_file(null)) {
-				window.welcome.hide();
-				window.tree_view.show();
-				window.add_button.show();
-			} else {
-				window.welcome.show();
-				window.tree_view.hide();
-				window.add_button.hide();
-			}
-
-            settings.changed.connect (() => {
-    			if (read_file(settings.todo_txt_file_path)) {
-    				window.welcome.hide();
-					window.tree_view.show();
-					window.add_button.show();
-    			} else if (settings.todo_txt_file_path == "" && read_file(null)) {
-    				window.welcome.show();
-					window.tree_view.hide();
-					window.add_button.hide();
-    			}
-            });
 			tasks_model_filter.refilter();
-
-			window.sidebar.item_selected.connect( (item) => {
-
-				string item_name = item.get_data("item-name");
-
-				if (item_name == "clear"){
-					context_filter = "";
-					project_filter = "";
-					tasks_model_filter.refilter();
-				}
-				else {
-					item_name = item.parent.get_data("item-name");
-					if (item_name == "contexts"){
-						context_filter = "@"+item.name;
-						project_filter = "";
-						tasks_model_filter.refilter();
-					}
-					else if (item_name == "projects") {
-						project_filter = "+"+item.name;
-						context_filter = "";
-						tasks_model_filter.refilter();
-					}
-				}
-			});
 
 			update_global_tags();
 		}
@@ -501,9 +437,8 @@ namespace Yishu {
 					window.tree_view.get_selection().select_iter(siter);
 				}
 
-				window.welcome.hide();
-				window.tree_view.show();
-				window.add_button.show();
+				window.normal_view.hide();
+				window.swin.show();
 
 				break;
 				default:
@@ -513,10 +448,15 @@ namespace Yishu {
 		}
 
 		private void delete_task () {
+			show_delete_dialog ();
+		}
+
+		private void show_delete_dialog () {
 			tasks_list_store.clear();
-			todo_file.lines.clear();
-			todo_file.write_file();
+			todo_file.delete_file();
 			update_global_tags();
+			window.normal_view.show();
+			window.swin.hide();
 		}
 
 		public bool read_file (string? filename) {
