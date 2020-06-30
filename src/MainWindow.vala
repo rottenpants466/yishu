@@ -54,7 +54,7 @@ namespace Yishu {
                          application: application,
                          app: application,
                          icon_name: "com.github.lainsce.yishu",
-                         height_request: 600,
+                         height_request: 300,
                          width_request: 500,
                          title: N_("Yishu")
             );
