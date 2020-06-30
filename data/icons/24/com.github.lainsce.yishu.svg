@@ -14,7 +14,7 @@
    height="24"
    id="svg2"
    version="1.1"
-   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
    inkscape:export-filename="/media/share/share/Projekte/todo/data/todo.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
@@ -92,17 +92,6 @@
          offset="1"
          id="stop3800" />
     </linearGradient>
-    <radialGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4007"
-       id="radialGradient3886"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0,0.46037529,-0.42543352,0,405.25464,1060.442)"
-       cx="-87.251137"
-       cy="924.82367"
-       fx="-87.251137"
-       fy="924.82367"
-       r="128.81" />
     <filter
        id="filter3895"
        inkscape:label="Apparition"
@@ -201,16 +190,6 @@
        xlink:href="#linearGradient27416-1-5"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.8047894,0,0,0.60165743,-1600.6032,-899.6948)" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4011"
-       id="linearGradient937"
-       x1="11.971417"
-       y1="1030.2859"
-       x2="11.971417"
-       y2="1050.4827"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.0024619,0,0,1.002462,-0.02954303,-2.5613245)" />
     <linearGradient
        x1="12.913282"
        y1="17.533852"
@@ -350,15 +329,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="22.627417"
-     inkscape:cx="17.142057"
-     inkscape:cy="8.7034457"
+     inkscape:zoom="16"
+     inkscape:cx="3.082758"
+     inkscape:cy="9.1540937"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:snap-page="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="962"
+     inkscape:window-width="2560"
+     inkscape:window-height="964"
      inkscape:window-x="0"
      inkscape:window-y="30"
      inkscape:window-maximized="1"
@@ -430,7 +409,7 @@
       </g>
     </g>
     <rect
-       style="fill:url(#radialGradient3886);fill-opacity:1;stroke:#206b00;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.53333285"
+       style="fill:#9acd6c;fill-opacity:1;stroke:#406220;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.53333336"
        id="rect3804"
        width="19"
        height="19"
@@ -447,28 +426,9 @@
        y="1028.3622"
        rx="0.26668"
        ry="0.23355" />
-    <rect
-       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient937);stroke-width:1.00246191;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.66315786;paint-order:fill markers stroke"
-       id="rect929"
-       width="16.997538"
-       height="16.997538"
-       x="3.501231"
-       y="1031.8634"
-       rx="0.49876785"
-       ry="0.49879667" />
     <path
        inkscape:connector-curvature="0"
-       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:0.07;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.96222103;marker:none;enable-background:accumulate"
-       id="path2922-6-6-0-9-4-2-6-2"
-       d="M 16.65101,1036.3622 19,1038.3846 11.107372,1048.3622 5,1043.3284 l 2.02013,-2.5618 3.570466,2.9663 z" />
-    <path
-       inkscape:connector-curvature="0"
-       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:0.15;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.96222103;marker:none;enable-background:accumulate"
-       id="path2922-6-6-0-9-4-2-6"
-       d="M 16.65101,1036.3622 19,1038.3846 11.107372,1048.3622 5,1043.3284 l 2.02013,-2.5618 3.570466,2.9663 z" />
-    <path
-       inkscape:connector-curvature="0"
-       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.96222103;marker:none;enable-background:accumulate"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#f7f7f7;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.96222103;marker:none;enable-background:accumulate"
        id="path2922-6-6-0-9-4-2"
        d="M 16.65101,1035.3622 19,1037.3846 11.107372,1047.3622 5,1042.3284 l 2.02013,-2.5618 3.570466,2.9663 z" />
   </g>
