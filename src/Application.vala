@@ -43,6 +43,8 @@ namespace Yishu {
 		/* Variables, Parameters and stuff */
 		private Task trashed_task;
 		public string current_filename = null;
+		private string project_filter;
+		private string context_filter;
 
 		static construct {
 			gsettings = new GLib.Settings ("com.github.lainsce.yishu");
@@ -118,7 +120,46 @@ namespace Yishu {
 
 			window.delete_all_button.clicked.connect( (item) => {
 				delete_task ();
+				window.sidebar.hide ();
+                window.sidebar_no_tags.show ();
 			});
+
+			window.sidebar.item_selected.connect( (item) => {
+
+				string item_name = item.get_data("item-name");
+
+				if (item_name == "clear"){
+					context_filter = "";
+					project_filter = "";
+					tasks_model_filter.refilter();
+				}
+				else {
+					item_name = item.parent.get_data("item-name");
+					if (item_name == "contexts"){
+						context_filter = "@"+item.name;
+						project_filter = "";
+						tasks_model_filter.refilter();
+					}
+					else if (item_name == "projects") {
+						project_filter = "+"+item.name;
+						context_filter = "";
+						tasks_model_filter.refilter();
+					}
+				}
+			});
+
+			if (read_file(null)){
+				window.normal_view.hide();
+				window.swin.show();
+				window.sidebar.show ();
+                window.sidebar_no_tags.hide ();
+			}
+			else {
+				window.normal_view.show();
+				window.swin.hide();
+				window.sidebar.hide ();
+                window.sidebar_no_tags.show ();
+			}
 
 			tasks_model_filter.refilter();
 

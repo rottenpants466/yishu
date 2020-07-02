@@ -284,14 +284,6 @@ namespace Yishu {
 
             sgrid.show_all ();
 
-            if (projects_category != null) {
-                sidebar.show ();
-                sidebar_no_tags.hide ();
-            } else {
-                sidebar.hide ();
-                sidebar_no_tags.show ();
-            }
-
             var grid = new Gtk.Grid ();
             grid.attach (titlebar, 1, 0, 1, 1);
             grid.attach (vbox, 1, 1, 1, 1);
