@@ -22,18 +22,6 @@
   <defs
      id="defs4">
     <linearGradient
-       inkscape:collect="always"
-       id="linearGradient896">
-      <stop
-         style="stop-color:#bcde9d;stop-opacity:1"
-         offset="0"
-         id="stop892" />
-      <stop
-         style="stop-color:#74b33b;stop-opacity:1"
-         offset="1"
-         id="stop894" />
-    </linearGradient>
-    <linearGradient
        id="linearGradient4007">
       <stop
          style="stop-color:#d1ff82;stop-opacity:1"
@@ -318,15 +306,6 @@
        x2="30.212982"
        y1="21.416878"
        x1="30.212982" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient896"
-       id="linearGradient898"
-       x1="16"
-       y1="1023.3622"
-       x2="16"
-       y2="1049.3622"
-       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -336,17 +315,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="13.601563"
-     inkscape:cx="1.6651358"
-     inkscape:cy="12.190602"
+     inkscape:cx="-11.495116"
+     inkscape:cy="11.492153"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:snap-page="true"
-     inkscape:window-width="2560"
-     inkscape:window-height="964"
-     inkscape:window-x="0"
-     inkscape:window-y="30"
-     inkscape:window-maximized="1"
+     inkscape:window-width="1266"
+     inkscape:window-height="701"
+     inkscape:window-x="749"
+     inkscape:window-y="55"
+     inkscape:window-maximized="0"
      showguides="true"
      inkscape:guide-bbox="true"
      showborder="true"
@@ -410,7 +389,7 @@
       </g>
     </g>
     <rect
-       style="fill:url(#linearGradient898);fill-opacity:1;stroke:#406220;stroke-width:0.98745877;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.53333336"
+       style="fill:#94ca63;fill-opacity:1;stroke:#406220;stroke-width:0.98745877;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.53333336"
        id="rect3804"
        width="27.012541"
        height="27.012541"

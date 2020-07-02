@@ -208,15 +208,6 @@
          style="stop-color:#68b723;stop-opacity:1"
          offset="1" />
     </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4007"
-       id="linearGradient864"
-       x1="70"
-       y1="942.36218"
-       x2="70"
-       y2="1042.3622"
-       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -226,17 +217,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.656854"
-     inkscape:cx="23.27347"
+     inkscape:cx="-8.3695599"
      inkscape:cy="58.507111"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:snap-page="true"
-     inkscape:window-width="2560"
-     inkscape:window-height="964"
-     inkscape:window-x="0"
-     inkscape:window-y="30"
-     inkscape:window-maximized="1"
+     inkscape:window-width="992"
+     inkscape:window-height="415"
+     inkscape:window-x="1052"
+     inkscape:window-y="317"
+     inkscape:window-maximized="0"
      showguides="true"
      inkscape:guide-bbox="true"
      showborder="true"
@@ -271,7 +262,7 @@
        rx="60.5"
        ry="3.25" />
     <rect
-       style="fill:url(#linearGradient864);fill-opacity:1;stroke:#406220;stroke-width:1.07216501;stroke-linejoin:round;stroke-opacity:0.53333336"
+       style="fill:#94ca63;fill-opacity:1;stroke:#406220;stroke-width:1.07216501;stroke-linejoin:round;stroke-opacity:0.53333336"
        id="rect3804"
        width="102.92783"
        height="102.92783"
