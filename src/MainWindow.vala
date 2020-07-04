@@ -192,13 +192,18 @@ namespace Yishu {
             prefs_button.action_name = ACTION_PREFIX + ACTION_PREFS;
 			prefs_button.text = (_("Preferences…"));
 
+			var dark_header = new Granite.HeaderLabel (_("Interface"));
+			var sep = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
+
 			var menu_grid = new Gtk.Grid ();
             menu_grid.margin = 6;
             menu_grid.row_spacing = 6;
-            menu_grid.column_spacing = 6;
+            menu_grid.column_spacing = 12;
             menu_grid.orientation = Gtk.Orientation.VERTICAL;
+            menu_grid.attach (dark_header, 0, 0, 1, 1);
             menu_grid.attach (dark_box, 0, 1, 1, 1);
-            menu_grid.attach (prefs_button, 0, 2, 1, 1);
+            menu_grid.attach (sep, 0, 2, 1, 1);
+            menu_grid.attach (prefs_button, 0, 3, 1, 1);
             menu_grid.show_all ();
 
             var menu = new Gtk.Popover (null);
@@ -216,22 +221,28 @@ namespace Yishu {
 
             var normal_icon = new Gtk.Image.from_icon_name ("appointment-new-symbolic", Gtk.IconSize.DND);
             var normal_label = new Gtk.Label (_("Start by adding some tasks…"));
+            normal_label.halign = Gtk.Align.START;
             var normal_label_context = normal_label.get_style_context ();
             normal_label_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
             normal_label_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-            var normal_label2 = new Gtk.Label (_("You can configure which Todo.txt file to use in Settings, the default is on Home."));
-            normal_label2.max_width_chars = 40;
-            normal_label2.wrap = true;
+            // Take care to use "\n" where the sentence should break to a new line.
+            var normal_label2 = new Gtk.Label (_("You can configure which Todo.txt file to use in Settings,\nthe default is on Home."));
             normal_label2.halign = Gtk.Align.START;
+            var normal_label2_context = normal_label2.get_style_context ();
+            normal_label2_context.add_class (Granite.STYLE_CLASS_H4_LABEL);
+            normal_label2_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+
+            var normal_label_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 6);
+            normal_label_box.add (normal_label);
+            normal_label_box.add (normal_label2);
 
             normal_view = new Gtk.Grid ();
-            normal_view.column_spacing = 6;
-            normal_view.margin = 24;
+            normal_view.column_spacing = 12;
+            normal_view.row_spacing = 24;
             normal_view.expand = true;
             normal_view.halign = normal_view.valign = Gtk.Align.CENTER;
-            normal_view.attach (normal_icon,0,0,1,2);
-            normal_view.attach (normal_label,1,0,1,1);
-            normal_view.attach (normal_label2,1,1,1,1);
+            normal_view.attach (normal_icon,0,0,1,1);
+            normal_view.attach (normal_label_box,1,0,1,1);
 
 			tree_view = setup_tree_view();
 			swin.add(tree_view);
@@ -247,7 +258,7 @@ namespace Yishu {
 			/* Create sidebar */
 			sidebar = new Granite.Widgets.SourceList();
 			sidebar.hexpand = false;
-			sidebar.margin_start = 12;
+			sidebar.margin_start = sidebar.margin_end = 8;
 			projects_category = new Granite.Widgets.SourceList.ExpandableItem ("");
 			string projects_str = _("CATEGORIES");
             projects_category.markup = """<span weight="bold">%s</span>""".printf(projects_str);

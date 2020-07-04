@@ -78,7 +78,6 @@ window.unified decoration-overlay {
 }
 
 .yi-column .source-list {
-.yi-column .source-list {
     background: mix (@accent_color, @base_color, 0.95);
 }
 
