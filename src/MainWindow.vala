@@ -261,12 +261,10 @@ namespace Yishu {
             sidebar.hexpand = false;
             sidebar.margin_top = 4;
 			sidebar.margin_start = sidebar.margin_end = 8;
-			projects_category = new Granite.Widgets.SourceList.ExpandableItem ("");
-			string projects_str = _("CATEGORIES");
-            projects_category.markup = """<span weight="bold">%s</span>""".printf(projects_str);
-			contexts_category = new Granite.Widgets.SourceList.ExpandableItem ("");
-			string contexts_str = _("LOCATIONS");
-            contexts_category.markup = """<span weight="bold">%s</span>""".printf(contexts_str);
+            projects_category = new Granite.Widgets.SourceList.ExpandableItem ("");
+            projects_category.markup = _("CATEGORIES");
+            contexts_category = new Granite.Widgets.SourceList.ExpandableItem ("");
+            contexts_category.markup = _("LOCATIONS");
 			projects_category.set_data("item-name", "projects");
 			contexts_category.set_data("item-name", "contexts");
 			sidebar.root.add(projects_category);
@@ -283,11 +281,11 @@ namespace Yishu {
             sidebar_no_tags.show_all ();
 
             var sidebar_header = new Gtk.Label("");
-            string header = _("TAGS");
+            sidebar_header.get_style_context ().add_class (Granite.STYLE_CLASS_H4_LABEL);
             sidebar_header.halign = Gtk.Align.START;
             sidebar_header.margin_start = 9;
             sidebar_header.margin_top = 6;
-            sidebar_header.set_markup ("""<span weight="bold">%s</span>""".printf(header));
+            sidebar_header.set_markup (_("TAGS"));
 
             var sgrid = new Gtk.Grid ();
 			sgrid.get_style_context ().add_class ("yi-column");
