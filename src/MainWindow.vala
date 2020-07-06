@@ -258,7 +258,8 @@ namespace Yishu {
 
 			/* Create sidebar */
 			sidebar = new Granite.Widgets.SourceList();
-			sidebar.hexpand = false;
+            sidebar.hexpand = false;
+            sidebar.margin_top = 4;
 			sidebar.margin_start = sidebar.margin_end = 8;
 			projects_category = new Granite.Widgets.SourceList.ExpandableItem ("");
 			string projects_str = _("CATEGORIES");
