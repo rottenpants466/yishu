@@ -284,7 +284,8 @@ namespace Yishu {
             var sidebar_header = new Gtk.Label("");
             string header = _("TAGS");
             sidebar_header.halign = Gtk.Align.START;
-            sidebar_header.margin_start = 6;
+            sidebar_header.margin_start = 9;
+            sidebar_header.margin_top = 6;
             sidebar_header.set_markup ("""<span weight="bold">%s</span>""".printf(header));
 
             var sgrid = new Gtk.Grid ();
