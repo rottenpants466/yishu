@@ -12,6 +12,10 @@ window.unified decoration-overlay {
     font-weight: 700;
 }
 
+.destructive-button:hover image {
+    color: #D07070;
+}
+
 .yi-titlebar {
     box-shadow: none;
     background: #FFF;

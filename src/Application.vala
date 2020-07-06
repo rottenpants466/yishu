@@ -119,9 +119,46 @@ namespace Yishu {
 			});
 
 			window.delete_all_button.clicked.connect( (item) => {
-				delete_task ();
-				window.sidebar.hide ();
-                window.sidebar_no_tags.show ();
+				var dialog = new Granite.MessageDialog.with_image_from_icon_name (
+					"Clear All Tasks?",
+					"Clearing all tasks clears the app of tasks, and deletes your Todo.txt file.",
+					"dialog-information",
+					Gtk.ButtonsType.NONE
+				);
+				var clear_button = new Gtk.Button.with_label (_("Clear All"));
+				clear_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+				dialog.add_action_widget (clear_button, Gtk.ResponseType.OK);
+	
+				var cancel_button = new Gtk.Button.with_label (_("Cancel"));
+				dialog.add_action_widget (cancel_button, Gtk.ResponseType.CANCEL);
+				cancel_button.clicked.connect (() => { dialog.destroy (); });
+				dialog.show_all ();
+				dialog.transient_for = window;
+				dialog.modal = true;
+	
+				dialog.run ();
+	
+				
+				dialog.response.connect ((response_id) => {
+					switch (response_id) {
+						case Gtk.ResponseType.OK:
+							delete_task ();
+							window.sidebar.hide ();
+							window.sidebar_no_tags.show ();
+							dialog.close ();
+							break;
+						case Gtk.ResponseType.NO:
+							dialog.close ();
+							break;
+						case Gtk.ResponseType.CANCEL:
+						case Gtk.ResponseType.CLOSE:
+						case Gtk.ResponseType.DELETE_EVENT:
+							dialog.close ();
+							return;
+						default:
+							assert_not_reached ();
+					}
+				});
 			});
 
 			window.sidebar.item_selected.connect( (item) => {

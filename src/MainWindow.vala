@@ -187,6 +187,7 @@ namespace Yishu {
             delete_all_button.set_image (new Gtk.Image.from_icon_name ("edit-clear-all-symbolic", Gtk.IconSize.BUTTON));
             delete_all_button.has_tooltip = true;
             delete_all_button.tooltip_text = (_("Clear all tasks"));
+            delete_all_button.get_style_context ().add_class ("destructive-button");
 
 			var prefs_button = new Gtk.ModelButton ();
             prefs_button.action_name = ACTION_PREFIX + ACTION_PREFS;
