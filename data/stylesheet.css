@@ -37,12 +37,12 @@ window.unified decoration-overlay {
 }
 
 .yi-titlebar .image-button:hover {
-    background: shade(@base_color, 0.95);
+    background: shade(@base_color, 0.85);
 }
 
 .yi-titlebar .image-button:active,
 .yi-titlebar .image-button.toggle:checked {
-    background: shade(@base_color, 0.95);
+    background: shade(@base_color, 0.85);
 }
 
 .yi-searchbar {
@@ -75,14 +75,14 @@ window.unified decoration-overlay {
 }
 
 .yi-column {
-    background: mix (@accent_color, @base_color, 0.95);
+    background: mix (@accent_color, @base_color, 0.85);
     border-right: 1px solid alpha (black, 0.25);
     box-shadow: none;
     padding-left: 6px;
 }
 
 .yi-column .source-list {
-    background: mix (@accent_color, @base_color, 0.95);
+    background: mix (@accent_color, @base_color, 0.85);
 }
 
 .yi-title {
