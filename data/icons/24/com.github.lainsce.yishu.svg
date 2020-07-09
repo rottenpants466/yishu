@@ -22,6 +22,22 @@
   <defs
      id="defs4">
     <linearGradient
+       inkscape:collect="always"
+       id="linearGradient891">
+      <stop
+         style="stop-color:#b6db95;stop-opacity:1"
+         offset="0"
+         id="stop887" />
+      <stop
+         id="stop895"
+         offset="0.10000087"
+         style="stop-color:#94ca63;stop-opacity:0.96097559" />
+      <stop
+         style="stop-color:#79ba3f;stop-opacity:1"
+         offset="1"
+         id="stop889" />
+    </linearGradient>
+    <linearGradient
        id="linearGradient4977">
       <stop
          id="stop4979"
@@ -321,6 +337,15 @@
          style="stop-color:#181818;stop-opacity:0"
          offset="1" />
     </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient891"
+       id="linearGradient893"
+       x1="12"
+       y1="1030.3622"
+       x2="12"
+       y2="1050.3622"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -330,17 +355,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="16"
-     inkscape:cx="-7.792242"
-     inkscape:cy="8.5603437"
+     inkscape:cx="-18.979742"
+     inkscape:cy="8.0290937"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:snap-page="true"
-     inkscape:window-width="1374"
-     inkscape:window-height="869"
-     inkscape:window-x="815"
-     inkscape:window-y="54"
-     inkscape:window-maximized="0"
+     inkscape:window-width="2560"
+     inkscape:window-height="964"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true"
      showborder="true"
@@ -409,7 +434,7 @@
       </g>
     </g>
     <rect
-       style="fill:#94ca63;fill-opacity:1;stroke:#406220;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.53333336"
+       style="fill:url(#linearGradient893);fill-opacity:1;stroke:#406220;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.53333336"
        id="rect3804"
        width="19"
        height="19"

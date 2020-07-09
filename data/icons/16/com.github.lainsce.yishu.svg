@@ -22,6 +22,22 @@
   <defs
      id="defs4">
     <linearGradient
+       inkscape:collect="always"
+       id="linearGradient862">
+      <stop
+         style="stop-color:#b8e581;stop-opacity:1"
+         offset="0"
+         id="stop858" />
+      <stop
+         id="stop866"
+         offset="0.04570852"
+         style="stop-color:#98d74a;stop-opacity:1;" />
+      <stop
+         style="stop-color:#62991f;stop-opacity:1"
+         offset="1"
+         id="stop860" />
+    </linearGradient>
+    <linearGradient
        id="linearGradient4007">
       <stop
          style="stop-color:#d1ff82;stop-opacity:1"
@@ -175,6 +191,15 @@
        xlink:href="#linearGradient27416-1-5"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.8047894,0,0,0.60165743,-1604.1829,-892.6901)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient862"
+       id="linearGradient864"
+       x1="7.0710678"
+       y1="1038.1447"
+       x2="7.2218256"
+       y2="1052.3622"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -184,8 +209,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="22.627417"
-     inkscape:cx="13.684941"
-     inkscape:cy="1.3429033"
+     inkscape:cx="5.7741839"
+     inkscape:cy="0.96725282"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -228,7 +253,7 @@
      id="layer1"
      transform="translate(0,-1036.3622)">
     <rect
-       style="fill:#94ca63;fill-opacity:1;stroke:#406220;stroke-width:1;stroke-opacity:0.53333336"
+       style="fill:url(#linearGradient864);fill-opacity:1;stroke:#406220;stroke-width:1;stroke-opacity:0.53333336"
        id="rect3804"
        width="14"
        height="14"

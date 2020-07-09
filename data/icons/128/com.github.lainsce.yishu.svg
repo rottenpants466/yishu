@@ -22,6 +22,22 @@
   <defs
      id="defs4">
     <linearGradient
+       inkscape:collect="always"
+       id="linearGradient860">
+      <stop
+         style="stop-color:#c3e1a7;stop-opacity:1"
+         offset="0"
+         id="stop856" />
+      <stop
+         id="stop864"
+         offset="0.09687079"
+         style="stop-color:#94ca63;stop-opacity:0.99215686;" />
+      <stop
+         style="stop-color:#7bbb40;stop-opacity:0.95294118"
+         offset="1"
+         id="stop858" />
+    </linearGradient>
+    <linearGradient
        id="linearGradient4007">
       <stop
          style="stop-color:#bcde9d;stop-opacity:1"
@@ -208,6 +224,15 @@
          style="stop-color:#68b723;stop-opacity:1"
          offset="1" />
     </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient860"
+       id="linearGradient862"
+       x1="65"
+       y1="937.36218"
+       x2="65"
+       y2="1042.3622"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -217,17 +242,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.656854"
-     inkscape:cx="-8.3695599"
-     inkscape:cy="58.507111"
+     inkscape:cx="-39.128706"
+     inkscape:cy="56.827732"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:snap-page="true"
-     inkscape:window-width="992"
-     inkscape:window-height="415"
-     inkscape:window-x="1052"
-     inkscape:window-y="317"
-     inkscape:window-maximized="0"
+     inkscape:window-width="2560"
+     inkscape:window-height="964"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true"
      showborder="true"
@@ -262,7 +287,7 @@
        rx="60.5"
        ry="3.25" />
     <rect
-       style="fill:#94ca63;fill-opacity:1;stroke:#406220;stroke-width:1.07216501;stroke-linejoin:round;stroke-opacity:0.53333336"
+       style="fill:url(#linearGradient862);fill-opacity:1;stroke:#406220;stroke-width:1.07216501;stroke-linejoin:round;stroke-opacity:0.53333336"
        id="rect3804"
        width="102.92783"
        height="102.92783"
