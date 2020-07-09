@@ -123,6 +123,9 @@ namespace Yishu {
             var provider = new Gtk.CssProvider ();
             provider.load_from_resource ("/com/github/lainsce/yishu/stylesheet.css");
             Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            // Ensure use of elementary theme and icons, accent color doesn't matter
+            Gtk.Settings.get_default().set_property("gtk-theme-name", "io.elementary.stylesheet.blueberry");
+            Gtk.Settings.get_default().set_property("gtk-icon-theme-name", "elementary");
 
 			actions = new SimpleActionGroup ();
             actions.add_action_entries (action_entries, this);
