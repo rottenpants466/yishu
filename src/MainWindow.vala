@@ -110,6 +110,7 @@ namespace Yishu {
         }
 
         construct {
+            Hdy.init ();
             key_press_event.connect ((e) => {
                 uint keycode = e.hardware_keycode;
                 if ((e.state & Gdk.ModifierType.CONTROL_MASK) != 0) {
