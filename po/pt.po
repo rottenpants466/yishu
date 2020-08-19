@@ -8,183 +8,188 @@ msgstr ""
 "Project-Id-Version: com.github.lainsce.yishu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-30 17:17+0100\n"
-"PO-Revision-Date: 2019-03-30 16:53+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-08-19 12:40+0100\n"
+"Last-Translator: André Barata <andretiagob@protonmail.com\n"
+"Language-Team: Portuguese (Portugal)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: src/Application.vala:74
 msgid "Search task"
-msgstr ""
+msgstr "Procurar tarefa"
 
 #: src/Application.vala:75
 msgid "Type Task Name"
-msgstr ""
+msgstr "Insira o Nome da Tarefa"
 
 #: src/Application.vala:153
 msgid "Edit task"
-msgstr ""
+msgstr "Editar tarefa"
 
 #: src/Application.vala:154
 msgid "Delete task"
-msgstr ""
+msgstr "Apagar tarefa"
 
 #: src/Application.vala:155
 msgid "Toggle done"
-msgstr ""
+msgstr "Alteração feita"
 
 #: src/Application.vala:159 src/TaskDialog.vala:44 src/MainWindow.vala:197
 msgid "Priority"
-msgstr ""
+msgstr "Prioridade"
 
 #: src/Application.vala:162
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 #: src/Application.vala:383
 msgid "The task has been deleted"
-msgstr ""
+msgstr "A tarefa foi apagada"
 
 #: src/Application.vala:385
 msgid "_Undo"
-msgstr ""
+msgstr "_Desfazer"
 
 #: src/Application.vala:448
 msgid "The todo.txt file has been modified and been re-read"
-msgstr ""
+msgstr "O ficheiro todo.txt foi modificado e relido"
 
 #: src/Task.vala:237
 msgid "Today"
-msgstr ""
+msgstr "Hoje"
 
 #: src/Task.vala:240
 msgid "Yesterday"
-msgstr ""
+msgstr "Ontem"
 
 #: src/Task.vala:243
 msgid "days ago"
-msgstr ""
+msgstr "dias atrás"
 
 #: src/TaskDialog.vala:33
 msgid "New Task"
-msgstr ""
+msgstr "Nova Tarefa"
 
 #: src/TaskDialog.vala:43 src/MainWindow.vala:202
 msgid "Task"
-msgstr ""
+msgstr "Tarefa"
 
 #: src/TaskDialog.vala:88
 msgid ""
 "Adding + to a word will categorize the task.\n"
 "Adding @ to a word will specify the task's place."
 msgstr ""
+"Adicionar + a uma palavra vai categorizar a tarefa\n"
+"Adicionar @ a uma palavra vai especificar o local da tarefa."
 
 #: src/TaskDialog.vala:90
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: src/TaskDialog.vala:91
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: src/MainWindow.vala:46
 msgid "Yishu"
-msgstr ""
+msgstr "Yishu"
 
 #: src/MainWindow.vala:91
 msgid "No Todo.txt File Open"
-msgstr ""
+msgstr "Nenhum Ficheiro Todo.txt Aberto"
 
 #: src/MainWindow.vala:91
 msgid "Open a todo.txt file to start adding tasks"
-msgstr ""
+msgstr "Abra um ficheiro todo.txt para começar a adicionar tarefas"
 
 #: src/MainWindow.vala:92
 msgid "Add task"
-msgstr ""
+msgstr "Adicionar tarefa"
 
 #: src/MainWindow.vala:92
 msgid "Create a new todo.txt file with this task in your Home folder"
-msgstr ""
+msgstr "Criar um novo ficheiro todo.txt com esta tarefa na sua Pasta Pessoal"
 
 #: src/MainWindow.vala:93
 msgid "What is a todo.txt file?"
-msgstr ""
+msgstr "O que é um ficheiro todo.txt?"
 
 #: src/MainWindow.vala:93
 msgid "Learn more about todo.txt files"
-msgstr ""
+msgstr "Aprenda mais sobre ficheiros todo.txt"
 
 #: src/MainWindow.vala:94
 msgid "No Todo.txt File Found"
-msgstr ""
+msgstr "Nenhum Ficheiro Todo.txt Encontrado"
 
 #: src/MainWindow.vala:94
 msgid "Add tasks to start this todo.txt file"
-msgstr ""
+msgstr "Adicionar tarefas para iniciar este ficheiro todo.txt"
 
 #: src/MainWindow.vala:105
 msgid "Add task…"
-msgstr ""
+msgstr "Adicionar tarefa..."
 
 #: src/MainWindow.vala:109 src/Preferences.vala:28
 msgid "Preferences"
-msgstr ""
+msgstr "Preferências"
 
 #: src/MainWindow.vala:125
 msgid "Settings"
-msgstr ""
+msgstr "Definições"
 
 #: src/MainWindow.vala:209
 msgid "Done"
-msgstr ""
+msgstr "Feito"
 
 #: src/Preferences.vala:38
 msgid "Todo.txt Preferences"
-msgstr ""
+msgstr "Preferências Todo.txt"
 
 #: src/Preferences.vala:39
 msgid "Default Location:"
-msgstr ""
+msgstr "Localização Padrão:"
 
 #: src/Preferences.vala:42
 msgid "Home Folder"
-msgstr ""
+msgstr "Pasta Pessoal"
 
 #: src/Preferences.vala:43
 msgid "Dropbox Folder"
-msgstr ""
+msgstr "Pasta Dropbox"
 
 #: src/Preferences.vala:44
 msgid "Nextcloud Folder"
-msgstr ""
+msgstr "Pasta Nextcloud"
 
 #: src/Preferences.vala:45
 msgid "ownCloud Folder"
-msgstr ""
+msgstr "Pasta ownCloud"
 
 #: src/Preferences.vala:46
 msgid "Other Clients Folder"
-msgstr ""
+msgstr "Pasta de Outros Clientes"
 
 #: src/Preferences.vala:103
 msgid "Custom Location:"
-msgstr ""
+msgstr "Localização Personalizada:"
 
 #: src/Preferences.vala:105
 msgid "Open your file"
-msgstr ""
+msgstr "Abrir o seu ficheiro"
 
 #: src/Preferences.vala:111
 msgid ""
 "Enabling custom locations will have you save your file\n"
 "in other places not recognized by other clients."
 msgstr ""
+"Ao ativar as localizações personalizáveis vai gravar o seu ficheiro\n"
+"em outras localizações não reconhecidas por outros clientes."
 
 #: src/Preferences.vala:160
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
