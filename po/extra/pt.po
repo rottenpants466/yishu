@@ -8,127 +8,137 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-30 17:18+0100\n"
-"PO-Revision-Date: 2019-03-30 16:53+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-08-19 13:04+0100\n"
+"Last-Translator: André Barata <andretiagob@protonmail.com\n"
+"Language-Team: Portuguese (Portugal)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: data/com.github.lainsce.yishu.desktop.in:3
 #: data/com.github.lainsce.yishu.appdata.xml.in:6
 msgid "Yishu"
-msgstr ""
+msgstr "Yishu"
 
 #: data/com.github.lainsce.yishu.desktop.in:4
 #: data/com.github.lainsce.yishu.appdata.xml.in:7
 msgid "A bespoke and simple Todo.txt client"
-msgstr ""
+msgstr "Um cliente Todo.txt à sua medida e simples"
 
 #: data/com.github.lainsce.yishu.desktop.in:7
 msgid "com.github.lainsce.yishu"
-msgstr ""
+msgstr "com.github.lainsce.yishu"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:9
 msgid ""
 "Write a to-do list that will be easy to sync with most known Todo.txt clients"
 msgstr ""
+"Escreva uma lista \"a fazer\" que vai ser simples sincronizar com a maioria "
+"dos clientes Todo.txt conhecidos"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:11
 msgid "Quit anytime with the shortcut Ctrl + Q"
-msgstr ""
+msgstr "Saía em qualquer altura com o atalho Ctrl + Q"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:12
 msgid "Easily shareable with other Todo.txt clients on other platforms"
 msgstr ""
+"É facilmente partilhável com outros clientes Todo.txt noutras plataformas"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:18
 msgid "Lains"
-msgstr ""
+msgstr "Lains"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:58
 msgid "Release: Zeit and Temps"
-msgstr ""
+msgstr "Lançamento: Zeit e Temps"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:60
 msgid "German and French translations."
-msgstr ""
+msgstr "Traduções Alemãs e Francesas."
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:66
 msgid "Release: Search &amp; Blues"
-msgstr ""
+msgstr "Lançamento: Procurar &amp; Azuis"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:68
 msgid "NEW: Search your tasks."
-msgstr ""
+msgstr "NOVO: Procurar as suas tarefas."
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:69
 msgid "FIX: Task folder is properly saved now."
-msgstr ""
+msgstr "Correção: Pasta de tarefas é agora gravada corretamente."
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:75
 msgid "Release: Juno Offering"
-msgstr ""
+msgstr "Lançamento: Oferta Juno"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:77
 msgid "Juno update."
-msgstr ""
+msgstr "Atualização Juno."
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:83
 msgid "Release: Flute Playing at an Temple"
-msgstr ""
+msgstr "Lançamento: Tocar Flauta num Templo"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:85
 msgid ""
 "Fixed retaining a list open on close and also adding tasks correctly to a "
 "list."
 msgstr ""
+"Corrigida a lista que se mantinha-se aberta ao fechar e também o adicionar "
+"correto de tarefas a uma lista."
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:91
 msgid "Release: Water Painting a Picture"
-msgstr ""
+msgstr "Lançamento: Água a Pintar uma Imagem"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:93
 msgid ""
 "Fixed internal GTK deprecations so the app doesn't complain about unused "
 "things."
 msgstr ""
+"Corrigidas deprecações internas do GTK para que a aplicação não reclame de "
+"coisas não usadas."
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:94
 msgid "New icon that improves on the old one."
-msgstr ""
+msgstr "Novo ícone que melhora o antigo."
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:100
 msgid "Release: Rest Easy and Calligraphy"
-msgstr ""
+msgstr "Lançamento: Descanse com Calma e Caligrafia"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:102
 msgid ""
 "Added a preferences dialog with a setting to where to save the todo.txt file."
 msgstr ""
+"Adicionado um dialogo de preferências com uma definição de onde gravar o "
+"ficheiro todo.txt."
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:108
 msgid "Release: Bamboo Shoots in the Sand"
-msgstr ""
+msgstr "Lançamento: Rebentos de Bambu Na Areia"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:110
 msgid "Added the option to create new todo.txt files on welcome."
-msgstr ""
+msgstr "Adicionada a opção para criar um novo ficheiro todo.txt no bem vindo."
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:116
 msgid "Release: A Tree Waving in the Wind"
-msgstr ""
+msgstr "Lançamento: Uma Árvore a Oscilar com o Vento"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:118
 msgid "Fixed minor things for the AppCenter review."
-msgstr ""
+msgstr "Correção de coisas pequenas para a análise no Centro de Aplicações."
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:124
 msgid "Release: A River Crossing"
-msgstr ""
+msgstr "Lançamento: Travessia do Rio"
 
 #: data/com.github.lainsce.yishu.appdata.xml.in:126
 msgid "First release."
-msgstr ""
+msgstr "Lançamento inicial."
